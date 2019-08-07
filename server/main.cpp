@@ -120,7 +120,7 @@ main (int argc, char **argv)
   std::shared_ptr<Transport> transport;
   boost::property_tree::ptree config;
   std::string confFile;
-  std::string modulesPath, logsPath, modulesConfigPath;
+  std::string modulesPath, logsPath, logsFileName, modulesConfigPath;
   int fileSize, fileNumber;
 
   Debug::DeathHandler dh;
@@ -148,6 +148,8 @@ main (int argc, char **argv)
      "Configuration file location")
     ("logs-path,d", boost::program_options::value <std::string> (&logsPath),
      "Path where rotating log files will be stored")
+    ("logs-file-name,j", boost::program_options::value <std::string> (&logsFileName),
+    "File name as which the log file will be saved")
     ("modules-config-path,c",
      boost::program_options::value <std::string> (&modulesConfigPath),
      "Path where modules config files can be found")
@@ -191,11 +193,11 @@ main (int argc, char **argv)
 
     kms_init_logging ();
 
-    if (vm.count ("logs-path") ) {
-      if (kms_init_logging_files (logsPath, fileSize, fileNumber) ) {
-        GST_INFO ("Logs storage path set to %s", logsPath.c_str() );
+    if (vm.count ("logs-path") && vm.count("logs-file-name")) {
+      if (kms_init_logging_files (logsPath, logsFileName, fileSize, fileNumber) ) {
+        GST_INFO ("Logs storage path set to %s, file name set to %s", logsPath.c_str(), logsFileName.c_str() );
       } else {
-        GST_WARNING ("Cannot set logs storage path to %s", logsPath.c_str() );
+        GST_WARNING ("Cannot either set logs storage path to %s, or set file name to %s", logsPath.c_str(), logsFileName.c_str() );
       }
     }
 

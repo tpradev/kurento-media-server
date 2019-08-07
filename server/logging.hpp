@@ -59,7 +59,7 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT (system_logger, kms_logger_mt)
 
 void kms_init_logging ();
 
-bool kms_init_logging_files (const std::string &path, int fileSize,
+bool kms_init_logging_files (const std::string &path, const std::string &fileName, int fileSize,
     int fileNumber);
 
 } /* kurento */

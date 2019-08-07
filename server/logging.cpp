@@ -287,7 +287,7 @@ system_formatter (logging::record_view const &rec,
 }
 
 bool
-kms_init_logging_files (const std::string &path, int fileSize, int fileNumber)
+kms_init_logging_files (const std::string &path, const std::string &fileName, int fileSize, int fileNumber)
 {
   gst_debug_remove_log_function (gst_debug_log_default);
   gst_debug_add_log_function(kms_log_function, nullptr, nullptr);
@@ -296,8 +296,7 @@ kms_init_logging_files (const std::string &path, int fileSize, int fileNumber)
 
   boost::shared_ptr< sinks::text_file_backend > backend =
     boost::make_shared< sinks::text_file_backend > (
-      keywords::file_name = path + "/" + "%Y-%m-%dT%H%M%S.%5N.pid" +
-                            std::to_string (getpid() ) + ".log",
+      keywords::file_name = path + "/" + fileName,
       keywords::rotation_size = fileSize * 1024 * 1024,
       keywords::time_based_rotation = sinks::file::rotation_at_time_point (0, 0, 0)
     );
