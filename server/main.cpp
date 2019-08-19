@@ -120,7 +120,7 @@ main (int argc, char **argv)
   std::shared_ptr<Transport> transport;
   boost::property_tree::ptree config;
   std::string confFile;
-  std::string modulesPath, logsPath, logsFileName, modulesConfigPath;
+  std::string modulesPath, logsPath, logFileName, modulesConfigPath;
   int fileSize, fileNumber;
 
   Debug::DeathHandler dh;
