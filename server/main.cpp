@@ -148,7 +148,7 @@ main (int argc, char **argv)
      "Configuration file location")
     ("logs-path,d", boost::program_options::value <std::string> (&logsPath),
      "Path where rotating log files will be stored")
-    ("logs-file-name,j", boost::program_options::value <std::string> (&logsFileName),
+    ("log-file-name,j", boost::program_options::value <std::string> (&logFileName),
     "File name as which the log file will be saved")
     ("modules-config-path,c",
      boost::program_options::value <std::string> (&modulesConfigPath),
@@ -193,11 +193,11 @@ main (int argc, char **argv)
 
     kms_init_logging ();
 
-    if (vm.count ("logs-path") && vm.count("logs-file-name")) {
-      if (kms_init_logging_files (logsPath, logsFileName, fileSize, fileNumber) ) {
-        GST_INFO ("Logs storage path set to %s, file name set to %s", logsPath.c_str(), logsFileName.c_str() );
+    if (vm.count ("logs-path") && vm.count("log-file-name")) {
+      if (kms_init_logging_files (logsPath, logFileName, fileSize, fileNumber) ) {
+        GST_INFO ("Logs storage path set to %s, file name set to %s", logsPath.c_str(), logFileName.c_str() );
       } else {
-        GST_WARNING ("Cannot either set logs storage path to %s, or set file name to %s", logsPath.c_str(), logsFileName.c_str() );
+        GST_WARNING ("Cannot either set logs storage path to %s, or set file name to %s", logsPath.c_str(), logFileName.c_str() );
       }
     }
 
